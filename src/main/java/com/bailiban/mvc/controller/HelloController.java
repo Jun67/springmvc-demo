@@ -1,4 +1,4 @@
-package com.bailiban.controller;
+package com.bailiban.mvc.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @RequestMapping({"/", "/hello", "/index"})
+    @RequestMapping(value = {"/", "/hello", "/index"})
     public String hello() {
-        return "hello";
+        return "hello你好";
     }
 }
