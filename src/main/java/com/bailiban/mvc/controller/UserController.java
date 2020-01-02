@@ -1,12 +1,15 @@
 package com.bailiban.mvc.controller;
 
 import com.bailiban.mvc.model.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -20,35 +23,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "get")
-    public User get(@RequestParam(value = "id", defaultValue = "-1") Integer id) {
-        System.out.println(id);
-        return userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null);
+    public String get(@RequestParam(value = "id", defaultValue = "-1") Integer id,
+                      String name,
+                      ModelMap model) {
+        System.out.println(id + ", " + name);
+        model.addAttribute("user",
+                userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null));
+        return "user";
     }
 
-    @PostMapping("add")
-    public String add(User user) {
+    @PostMapping("update")
+    public String update(User user) {
         System.out.println(user);
-        userList.add(user);
-        return "success";
-    }
-
-    @PostMapping("add2")
-    public String add2(@RequestBody User user) {
-        System.out.println(user);
-        userList.add(user);
-        return "success";
-    }
-
-    @PostMapping("requestBody1")
-    public String requestBody1(@RequestBody User user) {
-        System.out.println(user);
-        return "success";
-    }
-
-    @PostMapping("requestBody2")
-    public String requestBody2(@RequestBody String user) {
-        System.out.println(user);
-        return "success";
+        return "user";
     }
 
 }
