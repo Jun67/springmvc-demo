@@ -26,7 +26,7 @@ public class ServerTest {
     // URL映射，RequestMapping
     public static Map<String, MethodInfo> methodMap = new HashMap<>();
 
-    private static String pkg = "com.bailiban.socket.niohttptest";
+    private static String pkg = "com.bailiban.socket.niohttptest2";
 
     public static void main(String[] args) throws Exception {
 
