@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+<form method="post" action="/add">
+    <div><label>id: <input value="${user.id}" name="id" ></label></div>
+    <div><label>name: <input value="${user.name}" name="name" ></label></div>
+    <div><input type="submit" value="提交"></div>
+</form>
+<p>
+    ${msg}
+</p>
+</body>
+</html>

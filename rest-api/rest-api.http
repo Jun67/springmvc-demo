@@ -1,33 +1,26 @@
-GET http://localhost:8080/hello
-Accept: text/html
-
+GET http://localhost:8080/hello?age=1000
+Accept: text/html;charset=utf-8
 
 ###
-GET http://localhost:8080/rest-user/get?id=4
+GET http://localhost:8080/rest-user/get?id=1
 Accept: application/json
-
 
 ###
 POST http://localhost:8080/rest-user/add
-Content-Type: application/x-www-form-urlencoded
+Accept: text/html;charset=utf-8
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
 
-id=5&name=new-element&friends[0]=lily&friends[1]=kate&date=2020-01-01 12:00:00
-
-###
-
+id=5&name=Tim&friends=lily,kate&account.money=100&accountList[0].money=1&accountList[1].money=2
 ###
 POST http://localhost:8080/rest-user/add2
 Content-Type: application/json
 
 {
   "id": 5,
-  "name": "David",
+  "name": "David张三李四",
   "friends": null,
   "date": null
 }
-
-###
-
 ###
 POST http://localhost:8080/rest-user/requestBody1
 Content-Type: application/json
@@ -38,9 +31,6 @@ Content-Type: application/json
   "friends": null,
   "date": null
 }
-
-###
-
 ###
 POST http://localhost:8080/rest-user/requestBody2
 Content-Type: application/x-www-form-urlencoded
@@ -48,4 +38,3 @@ Content-Type: application/x-www-form-urlencoded
 id=5&name=new-element&friends[0]=lily&friends[1]=kate&date=2020-01-01 12:00:00
 
 ###
-

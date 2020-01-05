@@ -66,6 +66,9 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
+<!--            provided
+该依赖在打包过程中，不需要打进去，这个由运行的环境来提供，比如tomcat或者基础类库等等，事实上，
+该依赖可以参与编译、测试和运行等周期，与compile等同。区别在于打包阶段进行了exclude操作。-->
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/taglibs/standard -->
@@ -80,6 +83,12 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.0.Final</version>
         </dependency>
 
     </dependencies>
