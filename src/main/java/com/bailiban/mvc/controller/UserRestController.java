@@ -46,7 +46,7 @@ public class UserRestController {
     }
 
     @PostMapping("add2")
-    public String add2(@RequestBody User user) {
+    public String add2(User user) {
         System.out.println(user);
         userList.add(user);
         return "success";

@@ -9,7 +9,7 @@
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
 <!--                默认是iso编码-->
-<!--                <property name="defaultCharset" value="utf-8" />-->
+                <property name="defaultCharset" value="utf-8" />
             </bean>
 <!--            rest风格，直接返回对象，不需要配置下面的bean，只需要将jackson的core和databind添加到pom.xml文件即可
                 添加下面的bean反而会重复生成一个bean，思考下：为什么只需要pom.xml中添加对应依赖，即可动态添加如下bean？-->
@@ -31,6 +31,10 @@
             <bean class="com.bailiban.mvc.interceptor.HelloInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.bailiban.mvc.interceptor.ExceptionInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/user/*"/>
             <bean class="com.bailiban.mvc.interceptor.LoginInterceptor" />
         </mvc:interceptor>
@@ -43,6 +47,9 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- 不处理静态内容 -->
-    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/**" location="/WEB-INF/static/" />
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
 </beans>

@@ -4,6 +4,7 @@ import com.bailiban.mvc.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -80,6 +81,11 @@ public class UserController {
         }
         session.setAttribute("user", user);
         return "redirect:/user/home";
+    }
+
+    @GetMapping("update")
+    public String update() {
+        return "user";
     }
 
 }

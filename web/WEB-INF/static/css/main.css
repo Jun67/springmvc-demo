@@ -1,0 +1,20 @@
+.content-center{
+    width: 400px;
+    margin: 200px auto;
+    line-height: 35px;
+}
+a {
+    text-decoration: none;
+    padding: 0 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: azure;
+    border-radius: 6px;
+}
+div.head {
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    align-items: center;
+    background-color: aquamarine;
+}

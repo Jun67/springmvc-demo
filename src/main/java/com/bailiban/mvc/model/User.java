@@ -1,12 +1,13 @@
 package com.bailiban.mvc.model;
 
-import com.bailiban.mvc.validator.NameValidation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -17,9 +18,10 @@ import java.util.Set;
 @Accessors(chain = true)
 public class User {
 
+    @NotNull(message="ID不能为空!")
     private Integer id;
-//    @NotEmpty(message="用户名不能为空!")
-    @NameValidation(message="自定义注解校验器：用户名不能为空!")
+    @NotEmpty(message="用户名不能为空!")
+//    @NameValidation(message="自定义注解校验器：用户名不能为空!")
     private String name;
     private Set<String> friends;
     private Date date;
