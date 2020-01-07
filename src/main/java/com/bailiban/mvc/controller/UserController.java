@@ -19,31 +19,33 @@ import java.util.List;
 //@SessionAttributes(types = User.class)
 public class UserController {
 
-    private static List<User> userList = new ArrayList<>();
+    static List<User> userList = new ArrayList<>();
 
     static {
-        userList.add(new User(1, "Jim"));
-        userList.add(new User(2, "Lily"));
-        userList.add(new User(3, "Kate"));
-        userList.add(new User(4, "David"));
+        userList.add(new User(1, "Jim", "123456"));
+        userList.add(new User(2, "Lily", "123456"));
+        userList.add(new User(3, "Kate", "123456"));
     }
 
     @RequestMapping("login1")
-    public String login(User user) {
+    public String login1(User user) {
         return "forward:/user/login";
     }
 
     @RequestMapping("login")
-    public String login2(User user, HttpSession session) {
-        if (session.getAttribute("user") != null)
-            return "redirect:/user/home";
-
-        if (user.getId() != null &&
-                (userList.stream().anyMatch(u -> u.getId().equals(user.getId()) &&
-                        u.getName().equals(user.getName())))) {
-                session.setAttribute("user", user);
+    public String login(User user, HttpSession session) {
+        if (session.getAttribute("user") != null ||
+                user.getName() != null &&
+                userList.stream().anyMatch(u -> {
+                boolean flag = u.getName().equals(user.getName()) &&
+                        u.getPassword().equals(user.getPassword());
+                if (flag) {
+                    session.setAttribute("user", u);
+                }
+                return flag;
+            }))
                 return "redirect:/user/home";
-        }
+
         return "login";
     }
 
@@ -63,7 +65,7 @@ public class UserController {
     public String get(int id, ModelMap model) {
         model.addAttribute("user",
                 userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null));
-        return "user";
+        return "update";
     }
 
 //    @InitBinder
@@ -72,9 +74,9 @@ public class UserController {
 //    }
 
     @PostMapping("update")
-    public String update(@Validated User user, HttpSession session){
+    public String update(@Validated User user, HttpSession session) {
         System.out.println(user);
-        for (int i=0; i<userList.size(); i++) {
+        for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getId().equals(user.getId())) {
                 userList.set(i, user);
             }
@@ -85,7 +87,19 @@ public class UserController {
 
     @GetMapping("update")
     public String update() {
-        return "user";
+        return "update";
+    }
+
+    @PostMapping("register")
+    public String register(@Validated User user) {
+        user.setId(userList.size() + 1);
+        userList.add(user);
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("register")
+    public String register() {
+        return "register";
     }
 
 }

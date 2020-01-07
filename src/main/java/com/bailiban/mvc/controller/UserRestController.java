@@ -10,25 +10,17 @@ import java.util.List;
 @RequestMapping("/rest-user")
 public class UserRestController {
 
-    private static List<User> userList = new ArrayList<>();
-
-    static {
-        userList.add(new User(1, "Jim"));
-        userList.add(new User(2, "Lily"));
-        userList.add(new User(3, "Kate"));
-        userList.add(new User(4, "David"));
-    }
 
     @RequestMapping(value = "get")
     public User get0(int id) {
         System.out.println(id);
-        return userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null);
+        return UserController.userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null);
     }
 
     @RequestMapping(value = "get2")
     public User get(@RequestParam(value = "id", defaultValue = "-1") Integer id) {
         System.out.println(id);
-        return userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null);
+        return UserController.userList.stream().filter(u -> u.getId().equals(id)).findAny().orElse(null);
     }
 
 //    @ModelAttribute
@@ -41,14 +33,14 @@ public class UserRestController {
     @PostMapping("add")
     public String add(User user) {
         System.out.println(user);
-        userList.add(user);
+        UserController.userList.add(user);
         return user.toString();
     }
 
     @PostMapping("add2")
     public String add2(User user) {
         System.out.println(user);
-        userList.add(user);
+        UserController.userList.add(user);
         return "success";
     }
 

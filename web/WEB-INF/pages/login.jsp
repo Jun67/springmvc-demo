@@ -13,10 +13,11 @@ form {
 </style>
 </head>
 <body>
-    <form class="content-center" action="${pageContext.request.contextPath}/user/login" method="post">
-        <label>ID: <input name="id" value=""></label><br>
-        <label>Name: <input name="name" value=""></label><br>
-        <input type="submit" value="Login">
-    </form>
+<a href="${pageContext.request.contextPath}/user/register">注册</a>
+<form class="content-center" action="${pageContext.request.contextPath}/user/login" method="post">
+    <label>用户名: <input name="name" value=""></label><br>
+    <label>密 码: <input type="password" name="password" value=""></label><br>
+    <input type="submit" value="登录">
+</form>
 </body>
 </html>

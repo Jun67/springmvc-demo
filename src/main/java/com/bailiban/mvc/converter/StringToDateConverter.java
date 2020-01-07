@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class StringToDateConverter implements Converter<String, Date> {
 
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public Date convert(String source) {

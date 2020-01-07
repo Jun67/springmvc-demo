@@ -12,7 +12,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 不拦截 login
-        if (request.getRequestURI().contains("/login")) {
+        String url = request.getRequestURI();
+        if (url.contains("/login") || url.contains("/register")) {
             return true;
         }
         HttpSession session = request.getSession();

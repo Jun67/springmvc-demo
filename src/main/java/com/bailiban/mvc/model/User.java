@@ -1,13 +1,13 @@
 package com.bailiban.mvc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -18,18 +18,23 @@ import java.util.Set;
 @Accessors(chain = true)
 public class User {
 
-    @NotNull(message="ID不能为空!")
     private Integer id;
     @NotEmpty(message="用户名不能为空!")
 //    @NameValidation(message="自定义注解校验器：用户名不能为空!")
     private String name;
-    private Set<String> friends;
-    private Date date;
-    private Account account;
-    private Account[] accountList;
+    @Size(min = 6, max = 20, message = "请输入6~20位密码。")
+    private String password;
+    private Integer sex;
+    @Pattern(regexp = "^1[35678]\\d{9}$", message = "手机号码格式不正确。")
+    private String phone;
+    @Email
+    private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
 
-    public User(Integer id, String name) {
+    public User(Integer id, @NotEmpty(message = "用户名不能为空!") String name, @Size(min = 6, max = 20, message = "请输入6~20位密码。") String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
     }
 }
