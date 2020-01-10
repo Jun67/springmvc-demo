@@ -5,6 +5,14 @@
 <configuration>
     <properties resource="com/bailiban/mybatis/config/jdbc.properties">
     </properties>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+    </settings>
+    <typeAliases>
+<!--        <typeAlias type="com.bailiban.mybatis.model.User" alias="User" />-->
+        <package name="com.bailiban.mybatis.model"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -18,8 +26,9 @@
     </environments>
     <mappers>
         <mapper resource="com/bailiban/mybatis/mapper/xml/UserMapper.xml"/>
+        <mapper resource="com/bailiban/mybatis/mapper/xml/AccountMapper.xml"/>
+<!--        <mapper class="com.bailiban.mybatis.mapper.AccountMapper" />-->
+<!--        <package name="com.bailiban.mybatis.mapper"/>-->
     </mappers>
-<!--    <typeAliases>-->
-<!--        <typeAlias type="com.bailiban.mybatis.model.User" alias="User" />-->
-<!--    </typeAliases>-->
+
 </configuration>
