@@ -17,6 +17,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <context:component-scan base-package="com.bailiban.mvc.controller" />
+
     <bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
             <set>
@@ -39,8 +41,6 @@
             <bean class="com.bailiban.mvc.interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
-
-    <context:component-scan base-package="com.bailiban.mvc" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix" value="/WEB-INF/pages/" />

@@ -1,6 +1,8 @@
 package com.bailiban.mvc.controller;
 
+import com.bailiban.mvc.dao.UserDao;
 import com.bailiban.mvc.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,9 @@ import java.util.List;
 //@SessionAttributes(types = User.class)
 public class UserController {
 
+    @Autowired
+    private UserDao userDao;
+
     static List<User> userList = new ArrayList<>();
 
     static {
@@ -34,17 +39,23 @@ public class UserController {
 
     @RequestMapping("login")
     public String login(User user, HttpSession session) {
-        if (session.getAttribute("user") != null ||
-                user.getName() != null &&
-                userList.stream().anyMatch(u -> {
-                boolean flag = u.getName().equals(user.getName()) &&
-                        u.getPassword().equals(user.getPassword());
-                if (flag) {
-                    session.setAttribute("user", u);
-                }
-                return flag;
-            }))
-                return "redirect:/user/home";
+        User u2 = userDao.login(user);
+        System.out.println(u2);
+        if (u2 != null) {
+            session.setAttribute("user", u2);
+            return "redirect:/user/home";
+        }
+//        if (session.getAttribute("user") != null ||
+//                user.getName() != null &&
+//                userList.stream().anyMatch(u -> {
+//                boolean flag = u.getName().equals(user.getName()) &&
+//                        u.getPassword().equals(user.getPassword());
+//                if (flag) {
+//                    session.setAttribute("user", u);
+//                }
+//                return flag;
+//            }))
+//                return "redirect:/user/home";
 
         return "login";
     }
@@ -76,12 +87,13 @@ public class UserController {
     @PostMapping("update")
     public String update(@Validated User user, HttpSession session) {
         System.out.println(user);
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId().equals(user.getId())) {
-                userList.set(i, user);
-            }
-        }
+//        for (int i = 0; i < userList.size(); i++) {
+//            if (userList.get(i).getId().equals(user.getId())) {
+//                userList.set(i, user);
+//            }
+//        }
         session.setAttribute("user", user);
+        userDao.update(user);
         return "redirect:/user/home";
     }
 

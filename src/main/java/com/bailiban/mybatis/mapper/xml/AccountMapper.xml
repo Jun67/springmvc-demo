@@ -4,4 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bailiban.mybatis.mapper.AccountMapper">
 
+    <select id="findAccounts" resultType="Account">
+        select * from account
+        <trim prefix="where" prefixOverrides="or|and">
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="money != null">
+                and money >= #{money}
+            </if>
+        </trim>
+    </select>
 </mapper>

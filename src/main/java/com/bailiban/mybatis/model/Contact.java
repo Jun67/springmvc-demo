@@ -9,12 +9,12 @@ import lombok.experimental.Accessors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Accessors(chain = true)
-public class Account {
+@ToString
+public class Contact {
 
     private Integer id;
-    private String type;
-    private Double money;
+    private String phone;
+    private String email;
     private Integer userId;
 }

@@ -8,6 +8,7 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
 <!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+<!--        <setting name="cacheEnabled" value="true"/>-->
     </settings>
     <typeAliases>
 <!--        <typeAlias type="com.bailiban.mybatis.model.User" alias="User" />-->
@@ -26,9 +27,11 @@
     </environments>
     <mappers>
         <mapper resource="com/bailiban/mybatis/mapper/xml/UserMapper.xml"/>
+        <mapper class="com.bailiban.mybatis.mapper.AccountMapper" />
         <mapper resource="com/bailiban/mybatis/mapper/xml/AccountMapper.xml"/>
-<!--        <mapper class="com.bailiban.mybatis.mapper.AccountMapper" />-->
 <!--        <package name="com.bailiban.mybatis.mapper"/>-->
+        <mapper class="com.bailiban.mybatis.mapper.ContactMapper" />
+        <mapper resource="com/bailiban/mybatis/mapper/xml/ContactMapper.xml" />
     </mappers>
 
 </configuration>

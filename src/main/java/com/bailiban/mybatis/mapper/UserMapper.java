@@ -1,27 +1,30 @@
 package com.bailiban.mybatis.mapper;
 
 import com.bailiban.mybatis.model.User;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
-    public User selectUser(int id);
-    public User selectUser11(int id);
-    public User selectUser12(int id);
+    User selectUser(int id);
+    List<User> selectAllUser();
+    Integer insertUser(User user);
+    int insertUsers(List<User> users);
+
+//    @Insert("insert into user (name) values (${name})")
+//    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insertUser2(Map user);
+
+    @Results(id = "user222", value = {
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "contact", column = "id", one = @One(select =
+                "com.bailiban.mybatis.mapper.ContactMapper.findContactByUserId")),
+            @Result(property = "accounts", column = "id", many = @Many(select =
+                "com.bailiban.mybatis.mapper.AccountMapper.selectAccountsByUserId"))
+    })
     @Select("select * from user where id=#{id}")
-    public User selectUser2(int id);
-    @Select("select * from user where id=#{id}")
-    public User selectUser3(User user);
-    public User selectUser4(User user);
-    public User selectUser5(int id);
-    public User selectUserByIDAndName(int id, String name);
-    public User selectUserByIDAndName2(int id, String name);
-//    @Select("select name from user where id=#{id}")
-    public String selectName(int id);
-    public List<User> selectAllUser();
-    public User selectUserByName(String name);
-    public Integer insertUser(User user);
-    public int insertUsers(List<User> users);
+    User selectUser2(int id);
 }
